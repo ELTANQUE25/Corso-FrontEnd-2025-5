@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1, h2{
+    color: #0079bf;
+}
+
+h1 {
+    text-align: center;          
+}
+
+#catalog {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    gap: 0px;
+    justify-items: center;
+
+}
+
+#catalog div {
+    border: 1px solid #73c0ff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+}
+
+#catalog img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+button {
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.remove-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    margin-left: 5px;
+}
+
+.cart-item {
+    margin-bottom: 5px;
+}
+
+.empty-cart {
+    font-style: italic;
+    color: gray;
+}
+
+.add-btn {
+    background-color: #28a745; 
+    color: white; 
+    border: none; 
+    padding: 8px 16px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    transition: background-color 0.3s; 
+}
+
+.add-btn:hover {
+    background-color: #218838; 
+}
+
+.remove-btn {
+    padding: 8px 16px; 
+    border-radius: 5px; 
+}
+
+.Totale {
+    font-size: large;
+    font-weight: 600;
+}
