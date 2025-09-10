@@ -79,44 +79,66 @@ function updateCart() {
     }
 
     for (let i = 0; i < cart.length; i++) { 
-        let item = cart[i];
-        let product = null;
+        let item = cart[i]; //assegnamo l'elemento corrente del carrello alla variabile item.
+        let product = null; //dichiariamo una variabile vuota che viene popolata poi dal ciclo for
 
-        for (let j = 0; j < productCatalog.length; j++) {
+        for (let j = 0; j < productCatalog.length; j++) { //Se troviamo un prodotto con lo stesso id di item.productId, assegniamo l'oggetto prodotto a product e usiamo break per uscire dal ciclo, perché non c'è bisogno di continuare a cercare.
             if (productCatalog[j].id === item.productId) {
                 product = productCatalog[j];
                 break;
             }
         }
 
-        let div = document.createElement('div');
+        let div = document.createElement('div'); //questo è per visualizzare il prodotto nel carrello
         div.classList.add('cart-item');
         div.textContent = product.name + " x" + item.quantity + " - €" + (product.price * item.quantity).toFixed(2);
 
-        let removeBtn = document.createElement('button');
+        let removeBtn = document.createElement('button'); //creiamo il pulsante
         removeBtn.textContent = "Rimuovi";
         removeBtn.classList.add('remove-btn');
-        removeBtn.setAttribute('data-id', product.id);
-        removeBtn.addEventListener('click', function() {
+        removeBtn.setAttribute('data-id', product.id); //aggiungiamo un attributo personalizzato data-id che contiene l'ID del prodotto. Questo è utile per identificare quale prodotto stiamo rimuovendo quando l'utente clicca sul pulsante.
+        removeBtn.addEventListener('click', function() { //quando l'utente clicca sul pulsante "Rimuovi", eseguiamo la funzione all'interno dell'evento.
             let id = Number(this.getAttribute('data-id'));
 
-            for (let k = 0; k < cart.length; k++) {
-                if (cart[k].productId === id) {
+            for (let k = 0; k < cart.length; k++) { //ciclo per trovare prodotti nel carrello
+                if (cart[k].productId === id) { 
                     if (cart[k].quantity > 1) {
-                        cart[k].quantity -= 1;
+                        cart[k].quantity -= 1; //decrementiamo la quantità
                     } else {
-                        cart.splice(k, 1);
+                        cart.splice(k, 1); //rimuovere il prodotto dal carrello
                     }
                     break;
                 }
             }
 
-            updateCart();
-            updateTotal();
+            updateCart(); //per visualizzare il carrello aggiornato
+            updateTotal(); //per visualizzare il totale aggiornato
         });
 
-        div.appendChild(removeBtn);
-        cartDiv.appendChild(div);
+        div.appendChild(removeBtn); //aggiunge il pulsante Rimuovi al div
+        cartDiv.appendChild(div); //aggiungiamo il pulsante e il DIV al carrello
     }
 }
 
+// Aggiorna totale
+function updateTotal() { 
+    let total = 0; //variabile utilizzata per accumulare la somma dei prodotti
+
+    for (let i = 0; i < cart.length; i++) { //per scorrere gli articoli nel carrello
+        let item = cart[i]; //item rappresenta ogni oggetto nel carrello
+        for (let j = 0; j < productCatalog.length; j++) {
+            if (productCatalog[j].id === item.productId) { //si cerca nel catalogo il prodotto che corrisponde a quell'ID
+                total += productCatalog[j].price * item.quantity; //aggiorna il totale sommando il prezzo del prodotto moltiplicato per la quantità
+                break;
+            }
+        }
+    }
+
+    document.getElementById('total-price').textContent = total.toFixed(2); //converte il totale in una stringa con due decimali (per visualizzare il totale in formato monetario).
+}
+
+// Inizializzazione al caricamento DOM
+document.addEventListener('DOMContentLoaded', function() {
+    showCatalog();
+    updateCart();
+});

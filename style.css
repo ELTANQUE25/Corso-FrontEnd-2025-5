@@ -1,6 +1,17 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
+    margin: 0;
 }
 
 h1, h2{
@@ -17,6 +28,7 @@ h1 {
     grid-template-rows: repeat(1, 1fr);
     gap: 0px;
     justify-items: center;
+    margin-top: 50px;
 
 }
 
@@ -26,7 +38,6 @@ h1 {
     padding: 10px;
     margin-bottom: 10px;
     display: inline-block;
-    width: 150px;
     text-align: center;
 }
 
@@ -35,6 +46,11 @@ h1 {
     height: 100px;
     object-fit: cover;
     margin-bottom: 5px;
+    transition: transform 0.3s ease;
+}
+
+#catalog div:hover img {
+    transform: scale(1.2);
 }
 
 button {
@@ -78,7 +94,27 @@ button {
     border-radius: 5px; 
 }
 
+#shopping {
+    background-color: #0079bf;
+    margin-bottom: 150px;
+    padding-left: 20px;
+}
+
+
 .Totale {
     font-size: large;
     font-weight: 600;
+    padding-bottom: 10px;
 }
+
+footer {
+    background-color: #73c0ff;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.footer-text {
+    text-align: center;
+}
+
